@@ -4,15 +4,30 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
+
 router.get('/', (req, res) => {
-  // find all products
-  // be sure to include its associated Category and Tag data
+  Product.findAll({
+    include: [Tag],
+    include: [Category],// Include the associated Products
+  })
+    .then((products) => {
+      res.json(products); // Send the products as a JSON response
+    })
+    .catch((error) => {
+      res.status(500).json(error);
+    });
 });
 
 // get one product
+
 router.get('/:id', (req, res) => {
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  Product.findByPk(req.params.id)
+    .then((products) => {
+      res.json(products);
+    })
+    .catch((error) => {
+      res.json({ error: "failed to retrieve product" });
+    });
 });
 
 // create new product
