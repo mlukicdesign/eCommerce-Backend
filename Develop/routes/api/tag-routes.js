@@ -35,11 +35,8 @@ router.post("/", (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name,
   })
-    .then((newTag) => {
-      res.json(newTag);
-    })
     .then(() => {
-      res.json({ message: "New tag created" });
+      res.json({ message: "New tag created"});
     })
     .catch((err) => {
       console.log(err);
@@ -60,9 +57,6 @@ router.put("/:id", (req, res) => {
       },
     }
   )
-    .then((updatedTag) => {
-      res.json(updatedTag);
-    })
     .then(() => {
       res.json({ message: "Tag Updated" });
     })
@@ -80,9 +74,6 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((deleteTag) => {
-      res.json(deleteTag);
-    })
     .then(() => {
       res.json({ message: "Tag Deleted" });
     })

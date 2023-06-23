@@ -34,8 +34,8 @@ router.post("/", (req, res) => {
   Category.create({
     category_name: req.body.category_name,
   })
-    .then((newCategory) => {
-      res.json(newCategory);
+    .then(() => {
+      res.json({ mesasge: "Category created" })
     })
     .catch((err) => {
       console.log(err);
@@ -56,8 +56,8 @@ router.put("/:id", (req, res) => {
       },
     }
   )
-    .then((updateCategory) => {
-      res.json(updateCategory);
+    .then(() => {
+      res.json({ message: "Category updated succesfully" });
     })
     .catch((err) => {
       console.log(err);
@@ -73,8 +73,8 @@ router.delete("/:id", (req, res) => {
       id: req.params.id,
     },
   })
-    .then((deleteCategory) => {
-      res.json(deleteCategory);
+    .then(() => {
+      res.json({ message: 'Category deleted succesfully'});
     })
     .catch((err) => {
       console.log(err);

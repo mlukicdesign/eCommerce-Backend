@@ -7,6 +7,14 @@ This repository contains a functional Express.js API that connects to a MySQL da
 https://github.com/mlukicdesign/eCommerce-Backend
 
 
+### Walkthrough Video
+https://drive.google.com/file/d/1Uy-zmjvtiUzYstg_HnaH4j8ytk93RW9M/view
+
+
+### Project Mockup
+
+<img src="application_screenshot.png">
+
 ## Setup
 
 1. Clone the repository and navigate to the project directory.
@@ -20,11 +28,12 @@ https://github.com/mlukicdesign/eCommerce-Backend
 3. Install the dependencies by running `npm install`.
 4. Use the provided schema and seed files to set up a development database. Run the following commands:
    ```
-   npm run schema
-   npm run seed
+   mysql -u your_username -p
+   source ./db/schema.sql;
+   node seeds/index.js
    ```
    This will create the necessary tables in the database and populate them with test data.
-5. Start the application by running `npm start`. The Sequelize models will be synced with the MySQL database, and the server will be started.
+5. Start the application by running `npm start` or, run the Nodemon server with `npm run watch`. The Sequelize models will be synced with the MySQL database, and the server will be started.
 
 ## Usage
 
@@ -57,7 +66,8 @@ This eCommerce Backend with Sequelize provides a simple and functional backend f
 
 ## CONTACT ME
 
-mlukicdesign@gmail.com
+mlukicdesign@gmail.com 
+
 https://github.com/mlukicdesign
 
 thanks for viewing :)
