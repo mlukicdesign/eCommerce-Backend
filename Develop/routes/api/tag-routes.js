@@ -4,8 +4,6 @@ const { Tag, Product, ProductTag, Category } = require("../../models");
 // The `/api/tags` endpoint
 
 router.get("/", (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
   Tag.findAll({
     include: [Product],
   })
@@ -21,8 +19,6 @@ router.get("/", (req, res) => {
 
 
 router.get("/:id", (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
   Tag.findByPk(req.params.id)
     .then((tags) => {
       res.json(tags);
@@ -55,7 +51,7 @@ router.post("/", (req, res) => {
 
 router.put("/:id", (req, res) => {
   Tag.update(
-    { 
+    {
       tag_name: req.body.tag_name,
     },
     {
@@ -68,7 +64,7 @@ router.put("/:id", (req, res) => {
       res.json(updatedTag);
     })
     .then(() => {
-      res.json({ message: 'Tag Updated'});
+      res.json({ message: "Tag Updated" });
     })
     .catch((err) => {
       console.log(err);
@@ -88,11 +84,9 @@ router.delete("/:id", (req, res) => {
       res.json(deleteTag);
     })
     .then(() => {
-      res.json({ message: "Tag Deleted"})
+      res.json({ message: "Tag Deleted" });
     })
     .catch((err) => res.json(err));
 });
-
-
 
 module.exports = router;

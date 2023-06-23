@@ -3,14 +3,12 @@ const { Category, Product } = require("../../models");
 
 // The `/api/categories` endpoint
 
-// Find all categories
-
 router.get("/", (req, res) => {
   Category.findAll({
-    include: [Product], // Include the associated Products
+    include: [Product],
   })
     .then((categories) => {
-      res.json(categories); // Send the categories as a JSON response
+      res.json(categories);
     })
     .catch((error) => {
       res.status(500).json(error);
@@ -25,6 +23,7 @@ router.get("/:id", (req, res) => {
       res.json(categories);
     })
     .catch((error) => {
+      console.log(error);
       res.json({ error: "failed to retrieve category" });
     });
 });
@@ -39,10 +38,10 @@ router.post("/", (req, res) => {
       res.json(newCategory);
     })
     .catch((err) => {
-      res.json(err);
+      console.log(err);
+      res.json({ message: "Failed to create category" });
     });
 });
-
 
 // Update category by it's 'id'
 
@@ -61,26 +60,26 @@ router.put("/:id", (req, res) => {
       res.json(updateCategory);
     })
     .catch((err) => {
-      res.json(err);
+      console.log(err);
+      res.json({ message: "Failed to update category" });
     });
 });
-
 
 // delete a category by its `id` value
 
 router.delete("/:id", (req, res) => {
-
   Category.destroy({
     where: {
       id: req.params.id,
-    }
+    },
   })
-.then((deleteCategory) => {
-  res.json(deleteCategory);
-})
-.catch((err) => res.json(err));
+    .then((deleteCategory) => {
+      res.json(deleteCategory);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ message: "Failed to delete category" });
+    });
 });
-
-
 
 module.exports = router;
