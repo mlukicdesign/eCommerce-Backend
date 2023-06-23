@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
       res.json(products); // Send the products as a JSON response
     })
     .catch((error) => {
-      res.status(500).json(error);
+      res.json({ message: "failed to retrieve products" });
     });
 });
 
@@ -109,8 +109,34 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+
+// Delete Product
+
+router.delete("/:id", (req, res) => {
+  const productId = req.params.id;
+
+  // Delete the associated product tags first
+  ProductTag.destroy({
+    where: {
+      product_id: productId
+    }
+  })
+    .then(() => {
+      // Once the product tags are deleted, delete the product
+      return Product.destroy({
+        where: {
+          id: productId
+        }
+      });
+    })
+    .then((deletedProduct) => {
+      // Respond with a success message indicating the product has been deleted
+      res.json({ message: "Product deleted successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: "Failed to delete product" });
+    });
 });
 
 module.exports = router;

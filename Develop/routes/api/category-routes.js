@@ -29,7 +29,6 @@ router.get("/:id", (req, res) => {
     });
 });
 
-
 // Create New Category
 
 router.post("/", (req, res) => {
